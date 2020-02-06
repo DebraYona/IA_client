@@ -1,0 +1,51 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>IA cliente</title>
+        <!-- https://electronjs.org/docs/tutorial/security#csp-meta-tag -->
+        <meta content="script-src 'self' 'unsafe-inline';" http-equiv="Content-Security-Policy"/>
+        <link rel="stylesheet" href="./contents/bootstrap/4.1.3/css/bootstrap.min.css" />
+
+    </head>
+    <body>
+        <div>
+            <div style="text-align:center;">
+                <input type="button" value="Escoge una radiografia" id="create-new-file"/>
+            </div>
+        </div>
+
+        <h1>IA cliente</h1>
+        <a href="#" id="drag">item</a>
+        <script charset="utf-8" type="text/javascript">
+            document.getElementById('drag').ondragstart = (event) => {
+                event.preventDefault()
+                ipcRenderer.send('ondragstart', '/path/to/item')
+            }
+        </script>
+        We are using node
+        <script>
+            document.write(process.versions.node)
+        </script>,
+            Chrome
+        <script>
+            document.write(process.versions.chrome)
+        </script>,
+            and Electron
+        <script>
+            document.write(process.versions.electron)
+        </script>,
+        <script>
+            document.getElementById('select-file').addEventListener('click',function(){
+    dialog.showOpenDialog(function (fileNames) {
+        if(fileNames === undefined){
+            console.log("No file selected");
+        }else{
+            document.getElementById("actual-file").value = fileNames[0];
+            readFile(fileNames[0]);
+        }
+    }); 
+},false);
+        
+        </script>
+    </body>
+</html>
